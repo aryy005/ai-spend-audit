@@ -52,7 +52,7 @@ export function calculateAudit(context: AuditContext): AuditResult {
             recommendedPlan: 'Pro',
             recommendedSpend,
             savingsAmount: savings,
-            reason: `Enterprise/Business features are usually overkill for a team of ${context.teamSize}; Pro is sufficient.`,
+            reason: `Underutilized seat capacity: Enterprise SSO and advanced compliance features yield negative ROI for teams under 5. Downgrading to Pro eliminates deadweight loss.`,
           };
         }
       }
@@ -70,7 +70,7 @@ export function calculateAudit(context: AuditContext): AuditResult {
             recommendedPlan: 'Plus',
             recommendedSpend,
             savingsAmount: savings,
-            reason: 'Team plan is meant for 2+ users. Plus provides similar capabilities for a solo user.',
+            reason: 'Sub-optimal tier allocation: The Team plan minimum seat requirements create deadweight loss for solo users. Plus provides identical model utility at a lower unit cost.',
           };
         }
       }
@@ -88,7 +88,7 @@ export function calculateAudit(context: AuditContext): AuditResult {
             recommendedPlan: 'Pro',
             recommendedSpend,
             savingsAmount: savings,
-            reason: 'Claude Team requires a minimum of 5 seats. If your team is smaller, individual Pro accounts are cheaper.',
+            reason: 'Inefficient minimums: Claude Team enforces a 5-seat minimum ($150/mo baseline). Your current headcount makes individual Pro licenses strictly dominant economically.',
           };
         }
       } else if (context.primaryUseCase === 'writing' && (planLower.includes('pro') || planLower.includes('team'))) {
@@ -101,7 +101,7 @@ export function calculateAudit(context: AuditContext): AuditResult {
             recommendedPlan: 'API Direct',
             recommendedSpend,
             savingsAmount: savings,
-            reason: 'For writing tasks, using the Anthropic API directly via a custom interface or typing tool often costs significantly less than a flat $20/mo subscription.',
+            reason: 'Asset mismatch: Flat-rate subscriptions for occasional writing tasks are economically inefficient. Migrating to a consumption-based API model better aligns cost with actual token utilization.',
           };
         }
       }
@@ -119,7 +119,7 @@ export function calculateAudit(context: AuditContext): AuditResult {
             recommendedPlan: 'Cursor Pro (Alternative)',
             recommendedSpend,
             savingsAmount: savings,
-            reason: 'Cursor Pro provides a more deeply integrated AI experience for coding and may be more cost-effective than Copilot Enterprise/Business.',
+            reason: 'Redundant capability overlap: Copilot Enterprise/Business provides diminishing marginal utility for pure coding workflows compared to Cursor Pro. Consolidating yields significant unit cost reduction.',
           };
         }
       }
@@ -136,7 +136,7 @@ export function calculateAudit(context: AuditContext): AuditResult {
         recommendedPlan: null,
         recommendedSpend: sub.monthlySpend,
         savingsAmount: 0,
-        reason: 'You are already using the optimal plan for your use case and team size.',
+        reason: 'Capital efficient allocation: Your current tier structure aligns perfectly with your headcount and primary utilization patterns. No arbitrage opportunities identified.',
       });
     }
   }

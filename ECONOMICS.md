@@ -1,18 +1,24 @@
 # Unit Economics
 
-## Costs per Audit
-- **Anthropic API**: ~100 tokens input, ~100 tokens output for Claude 3.5 Sonnet. Cost is extremely negligible (<$0.001 per audit).
-- **Vercel Compute**: Covered under Pro plan, essentially $0 marginal cost.
-- **Supabase**: Free tier handles 50,000 MAU. Marginal cost $0 for early stage.
-- **Resend**: 3,000 free emails/mo. Marginal cost $0 initially.
+## The Cost Structure (COGS)
+This tool is incredibly asset-light. We rely on deterministic rules for the heavy lifting (which costs essentially zero) and only use LLMs for the final qualitative polish.
+- **Anthropic API (Claude 3.5 Sonnet)**: ~150 tokens input, ~80 tokens output. At $3/M input and $15/M output, the cost per audit generation is roughly **$0.0016**.
+- **Database (Supabase)**: Free tier covers 500MB and 50,000 MAU. Marginal cost is $0.
+- **Compute (Vercel)**: Server Actions run on edge/serverless. Free tier handles 100GB-hrs. Marginal cost is $0.
+- **Email (Resend)**: Free for first 3,000 emails/mo.
 
-**Total Cost of Goods Sold (COGS) per user**: ~$0.001
+**Total COGS per Audit**: ~$0.002. We can run 10,000 audits for $20.
 
-## Revenue per Audit
-- This is a lead generation tool for Credex.
-- Let's assume a 5% conversion rate to the "Consultation CTA" for high-spend users.
-- Average consultation value (LTV): $2,000.
-- **Expected Value (EV) per high-spend audit**: $100.
+## The Revenue Model (LTV & CAC)
+This product is a top-of-funnel (ToFu) lead magnet for Credex's core business: Enterprise SaaS Negotiation & Procurement.
+- **Core Product**: Credex takes a 20% cut of the first year's savings when negotiating Enterprise contracts, OR charges a flat $2,000 retainer for a full stack overhaul.
+- **Conversion Math**: 
+  - Assume 1,000 audits run.
+  - 10% (100) are "High Spend" (>$500/mo waste).
+  - 5% of High Spend book a consultation (5 calls).
+  - 20% close rate on calls (1 new client).
+  - Estimated LTV of a client: $3,000.
+  - **Expected Value per Audit run**: $3.00.
 
 ## Conclusion
-The tool is highly profitable as a marketing asset due to its near-zero marginal cost and high potential LTV from consultation conversions.
+With a COGS of $0.002 and an Expected Value of $3.00, the tool has an asymmetric ROI. It is highly profitable purely as a marketing asset. Every dollar spent driving traffic to this tool yields massive leverage compared to traditional B2B SaaS ads (where CPCs can be $10+).

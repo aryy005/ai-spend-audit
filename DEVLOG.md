@@ -13,6 +13,7 @@
 ## Day 3: May 3, 2026 - Database & Infrastructure
 - **Focus**: Persistence and schema design.
 - **Actions**: Designed the Supabase schema (`schema.sql`). Split `leads` and `audits` to allow for un-gated audits. Wrote the Next.js Server Actions to handle the DB insertions.
+- **Ambiguity Assumption**: The requirements stated "Email captured AFTER showing audit results," but also requested a "Shareable URL". I assumed the shared URL is strictly read-only public proof. The lead capture only appears for the *original creator* immediately after generation (tracked via `sessionStorage`). If you aren't the creator, you just see the clean stats.
 - **Thoughts**: The "give before you get" model is crucial. I want to show them the savings *before* asking for an email. This schema supports that flow perfectly.
 
 ## Day 4: May 4, 2026 - The AI Integration

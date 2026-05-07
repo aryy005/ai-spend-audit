@@ -14,3 +14,10 @@ By strictly isolating the LLM from the math. LLMs are notoriously bad at arithme
 
 ## 5. What are the security/privacy considerations?
 We intentionally decoupled the financial data from the PII (Personally Identifiable Information). When a user runs an audit, the financial data is saved to Supabase and a random `slug` is generated. At this stage, there is absolutely no way to tie that spend data back to a specific company. Only if they explicitly choose to provide their email *after* seeing the value is the `lead_id` attached. Even then, the public URL strips the email from the payload. We also implemented a honeypot field on the lead capture form to deter basic bot spam.
+
+## 6. AI Usage Disclosure
+I used Cursor and Claude 3.5 Sonnet extensively as pair-programming partners, but this codebase is far from a "one-shot" generation.
+- **Architecture & Logic**: The database schema, architecture flow, and specific business logic rules (the "financial truths") were entirely human-directed and designed. I specifically *avoided* using AI to write the core deterministic logic in `audit-engine.ts` initially to ensure the math was flawless.
+- **Scaffolding & UI**: I leaned on Claude to generate the initial boilerplate for the React components and to help style the `shadcn/ui` components quickly with Tailwind.
+- **Testing & Copy**: I used AI to help flesh out the Vitest coverage for edge cases, and to help refine my raw notes from user interviews into the polished "finance-literate" terminology used in the final app UI. 
+- **Commit History**: The incremental commit history reflects the actual manual, iterative building process over the past week.

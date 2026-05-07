@@ -8,7 +8,8 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost:54
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'dummy_key';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
   return {
     title: 'Credex AI Spend Audit Results',
     description: 'View your personalized AI spend optimization plan.',
@@ -25,12 +26,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function AuditResultPage({ params }: { params: { slug: string } }) {
+export default async function AuditResultPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  
   // Try to fetch from DB
   const { data: audit, error } = await supabase
     .from('audits')
     .select('*, audit_tools(*)')
-    .eq('slug', params.slug)
+    .eq('slug', resolvedParams.slug)
     .single();
 
   let auditData = null;
@@ -68,7 +71,7 @@ export default async function AuditResultPage({ params }: { params: { slug: stri
       </header>
 
       <main className="container mx-auto px-4 py-12 max-w-5xl">
-        <ResultsContainer slug={params.slug} initialData={auditData} />
+        <ResultsContainer slug={resolvedParams.slug} initialData={auditData} />
       </main>
     </div>
   );
